@@ -41,13 +41,13 @@ def extrair_linha_por_pagina(pdf, num_pagina):
         st.error(f"Erro ao ler a página {num_pagina}: {e}")
     return []
 
-st.title("⚡ Relatório Diário - UTD Bertioga")
-st.markdown("Arrasta o **PDF completo** para a caixa abaixo. O sistema já vai ler as páginas certas (1, 2, 4, 5 e 6).")
+st.title("⚡ 𝕽𝖊𝖑𝖆𝖙𝖔𝖗𝖎𝖔 𝕯𝖎𝖆𝖗𝖎𝖔 - 𝖀𝕿𝕯 𝕭𝖊𝖗𝖙𝖎𝖔𝖌𝖆")
+st.markdown("Arrasta o **PDF completo** para a caixa abaixo.")
 
 ficheiro_carregado = st.file_uploader("Carrega o PDF do Gráfico Diário", type=["pdf"])
 
 if ficheiro_carregado is not None:
-    with st.spinner('Mapeando as páginas e extraindo dados, segura a emoção...'):
+    with st.spinner('Mapeando as páginas e extraindo dados...'):
         try:
             with pdfplumber.open(ficheiro_carregado) as pdf:
                 # Pegando a linha da Bertioga em cada página específica
@@ -59,7 +59,7 @@ if ficheiro_carregado is not None:
 
             # Verificação básica se achou na primeira página
             if not pag1:
-                st.warning("⚠️ Não encontrei os dados na Página 1. Tem certeza que é o PDF certo?")
+                st.warning("DADOS NÃO ENCONTRADOS, PDF CORRETO?")
             else:
                 # ==========================================
                 # DICIONÁRIO MAPEADO CONFORME A SUA LISTA
@@ -158,7 +158,7 @@ Resultado acumulado: {dados['int_real_acum']} {verifica_meta(dados['int_real_acu
 Meta acumulado: {dados['rein_meta_acum']}
 Resultado acumulado: {dados['rein_real_acum']} {verifica_meta(dados['rein_real_acum'], dados['rein_meta_acum'])}
 """
-                st.success("✅ Relatório gerado! Confere se os números bateram com o mapeamento e manda bala:")
+                st.success("✅ Relatório gerado! Importante conferir se os dados batem.")
                 st.code(mensagem, language="text")
 
         except Exception as e:
